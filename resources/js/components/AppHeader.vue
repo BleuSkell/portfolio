@@ -31,7 +31,7 @@ import {
 import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl, urlIsActive } from '@/lib/utils';
-import { dashboard } from '@/routes';
+import { about, projects, contact } from '@/routes';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { InertiaLinkProps, Link, usePage } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
@@ -62,23 +62,24 @@ const activeItemStyles = computed(
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+        title: 'SEERVS',
+        href: '/',
     },
 ];
 
 const rightNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
+        title: 'about',
+        href: about(),
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
+        title: 'projects',
+        href: projects(),
     },
+    {
+        title: 'contact',
+        href: contact(),
+    }
 ];
 </script>
 
@@ -148,13 +149,13 @@ const rightNavItems: NavItem[] = [
                     </Sheet>
                 </div>
 
-                <Link :href="dashboard()" class="flex items-center gap-x-2">
+                <!-- <Link :href="about()" class="flex items-center gap-x-2">
                     <AppLogo />
-                </Link>
+                </Link> -->
 
                 <!-- Desktop Menu -->
                 <div class="hidden h-full lg:flex lg:flex-1">
-                    <NavigationMenu class="ml-10 flex h-full items-stretch">
+                    <NavigationMenu class="flex h-full items-stretch">
                         <NavigationMenuList
                             class="flex h-full items-stretch space-x-2"
                         >
@@ -189,7 +190,7 @@ const rightNavItems: NavItem[] = [
 
                 <div class="ml-auto flex items-center space-x-2">
                     <div class="relative flex items-center space-x-1">
-                        <Button
+                        <!-- <Button
                             variant="ghost"
                             size="icon"
                             class="group h-9 w-9 cursor-pointer"
@@ -197,13 +198,45 @@ const rightNavItems: NavItem[] = [
                             <Search
                                 class="size-5 opacity-80 group-hover:opacity-100"
                             />
-                        </Button>
+                        </Button> -->
 
                         <div class="hidden space-x-1 lg:flex">
-                            <template
+                            <NavigationMenu class="ml-10 flex h-full items-stretch">
+                                <NavigationMenuList
+                                    class="flex h-full items-stretch space-x-2"
+                                >
+                                    <NavigationMenuItem
+                                        v-for="item in rightNavItems"
+                                        :key="item.title"
+                                        class="relative flex h-full items-center"
+                                    >
+                                        <Link
+                                            :class="[
+                                                navigationMenuTriggerStyle(),
+                                                activeItemStyles(item.href),
+                                                'h-9 cursor-pointer px-3',
+                                            ]"
+                                            :href="item.href"
+                                        >
+                                            <component
+                                                v-if="item.icon"
+                                                :is="item.icon"
+                                                class="mr-2 h-4 w-4"
+                                            />
+                                            {{ item.title }}
+                                        </Link>
+                                        <div
+                                            v-if="isCurrentRoute(item.href)"
+                                            class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
+                                        ></div>
+                                    </NavigationMenuItem>
+                                </NavigationMenuList>
+                            </NavigationMenu>
+
+                            <!-- <template
                                 v-for="item in rightNavItems"
                                 :key="item.title"
-                            >
+                            >   
                                 <TooltipProvider :delay-duration="0">
                                     <Tooltip>
                                         <TooltipTrigger>
@@ -233,11 +266,11 @@ const rightNavItems: NavItem[] = [
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
-                            </template>
+                            </template> -->
                         </div>
                     </div>
 
-                    <DropdownMenu>
+                    <!-- <DropdownMenu>
                         <DropdownMenuTrigger :as-child="true">
                             <Button
                                 variant="ghost"
@@ -263,7 +296,7 @@ const rightNavItems: NavItem[] = [
                         <DropdownMenuContent align="end" class="w-56">
                             <UserMenuContent :user="auth.user" />
                         </DropdownMenuContent>
-                    </DropdownMenu>
+                    </DropdownMenu> -->
                 </div>
             </div>
         </div>

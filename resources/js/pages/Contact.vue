@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import { dashboard } from '@/routes';
+import { contact } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import PlaceholderPattern from '../components/PlaceholderPattern.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard().url,
+        title: 'Contact',
+        href: contact().url,
     },
 ];
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Contact" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div
