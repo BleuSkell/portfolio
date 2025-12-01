@@ -56,7 +56,7 @@ const isCurrentRoute = computed(
 const activeItemStyles = computed(
     () => (url: NonNullable<InertiaLinkProps['href']>) =>
         isCurrentRoute.value(toUrl(url))
-            ? 'text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100'
+            ? 'text-[#E95900]'
             : '',
 );
 
@@ -85,8 +85,8 @@ const rightNavItems: NavItem[] = [
 
 <template>
     <div>
-        <div class="border-b border-sidebar-border/80">
-            <div class="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
+        <div class="bg-transparent">
+            <div class="flex h-16 items-center px-4 w-full">
                 <!-- Mobile Menu -->
                 <div class="lg:hidden">
                     <Sheet>
@@ -181,7 +181,6 @@ const rightNavItems: NavItem[] = [
                                 </Link>
                                 <div
                                     v-if="isCurrentRoute(item.href)"
-                                    class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
                                 ></div>
                             </NavigationMenuItem>
                         </NavigationMenuList>
@@ -227,7 +226,6 @@ const rightNavItems: NavItem[] = [
                                         </Link>
                                         <div
                                             v-if="isCurrentRoute(item.href)"
-                                            class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
                                         ></div>
                                     </NavigationMenuItem>
                                 </NavigationMenuList>
